@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int findDigits(int n) {
+    int original_n = n;
+    int count = 0;
+    
+    while (n > 0) {
+        int digit = n % 10; 
+        if (digit != 0 && original_n % digit == 0) {
+            count++;
+        }
+        n /= 10; 
+    }
+    
+    return count;
+}
+
+int main() {
+    int t; 
+    cin >> t;
+    
+    vector<int> testCases(t);
+    
+    for (int i = 0; i < t; ++i) {
+        cin >> testCases[i];
+    }
+    
+    for (int i = 0; i < t; ++i) {
+        cout << findDigits(testCases[i]) << endl;
+    }
+    
+    return 0;
+}
