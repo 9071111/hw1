@@ -1,62 +1,58 @@
-#include <iostream>
-#include <vector>
-
+#include<iostream>
+#include<vector>
 using namespace std;
-
-
-int gcd(int a, int b) {
-    while (b != 0) {
-        int temp = b;
-        b = a % b;
-        a = temp;
-    }
-    return a;
-}
-
-
-int lcm(int a, int b) {
-    return (a * b) / gcd(a, b);
-}
-
-
 int getTotalX(vector<int> a, vector<int> b) {
-    int lcm_a = a[0];
-    for (int i = 1; i < a.size(); ++i) {
-        lcm_a = lcm(lcm_a, a[i]);
-    }
-
-    int gcd_b = b[0];
-    for (int i = 1; i < b.size(); ++i) {
-        gcd_b = gcd(gcd_b, b[i]);
-    }
-
     int count = 0;
-    for (int i = lcm_a, j = 2; i <= gcd_b; i = lcm_a * j, ++j) {
-        if (gcd_b % i == 0) {
+    int max1 = 1, min2 = 100;
+    int n1 = a.size();
+    int n2 = b.size();
+    for (int i = 0; i < n1; i++) {
+        if (a[i] > max1) {
+            max1 = a[i];
+        }
+    }
+    for (int i = 0; i < n2; i++) {
+        if (b[i] < min2) {
+            min2 = b[i];
+        }
+    }
+    for (int i = max1; i <= min2; i++) {
+        bool check = true;
+        for (int j = 0; j < n1; j++) {
+            if (i% a[j] != 0) {
+                check = false;
+            }
+        }
+        
+        if (check) {
+            for (int j = 0; j < n2; j++) {
+                if (b[j] % i != 0) {
+                    check = false;
+                }
+            }
+        }
+        if (check) {
             count++;
         }
     }
-
-    return count;
+    return count;   
+    
 }
 
-int main() {
-    int n, m;
-    cin >> n >> m;
-
+int main(){
+    int n,m;
+    cin>>n>>m;
     vector<int> a(n);
     vector<int> b(m);
-
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
+    for(int i=0;i<n;++i){
+        cin>>a[i];
     }
-
-    for (int i = 0; i < m; ++i) {
-        cin >> b[i];
+    for(int i=0;i<m;++i){
+        cin>>b[i];
     }
-
-    int result = getTotalX(a, b);
-    cout << result << endl;
-
+    int resul=getTotalX(a,b);
+    cout<<resul<<endl;
     return 0;
 }
+
+
