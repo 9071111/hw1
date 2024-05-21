@@ -1,0 +1,26 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+    int n;
+    cin>>n;
+    string binary=" ";
+    while(n>0){
+        binary=(n%2==0? "0": "1")+binary;
+        n/=2;
+    }
+    int maxC=0;
+    int currentC=0;
+    for(char i:binary){
+        if(i=='1'){
+            currentC++;
+            if(currentC>maxC){
+                maxC=currentC;
+            }
+        }else{
+            currentC=0;
+        }
+    }
+    cout<<maxC<<endl;
+    return 0;
+}
